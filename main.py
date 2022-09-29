@@ -31,7 +31,6 @@ def calculate(memArr, pqArr, maxIndex, pqUsedArr):
             tempRes.append(temp)
         if tempRes[maxIndex]==0:#right pq found
             printFixedLen(pq)
-            print(f"|",end="")
             printArr(tempRes)
             pqUsedArr.append(pq)
             if maxIndex == 1:# only one number left
@@ -45,7 +44,7 @@ def getBracket(pqUsed):
 
 def printRes():
     string = ""
-    for x in range(0,len(memArr)*6+5):
+    for x in range(0,len(memArr)*6+5):#dynamic row of "–"
         string += "–"
     print(string)
 
@@ -54,6 +53,7 @@ def printRes():
     print()
 
 def printArr(arr):
+    print(f"|",end="")
     for x in arr:
         printFixedLen(float(x))
     print()
@@ -68,7 +68,7 @@ maxIndex = len(memArr)-1
 pArr = findFactors(memArr,maxIndex)
 qArr = findFactors(memArr,0)
 pqArr = findPQ(pArr,qArr)
-print(f"  –  |",end="")
+print(f"  –  ",end="")
 printArr(memArr)
 pqUsedArr = calculate(memArr, pqArr, maxIndex, pqUsedArr)
 if pqUsedArr:
