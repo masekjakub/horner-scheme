@@ -29,13 +29,12 @@ def calculate(memArr, pqArr, maxIndex, pqUsedArr):
             temp = pq * resFromPrevCol + int(member)
             resFromPrevCol = temp
             tempRes.append(temp)
-        if tempRes[maxIndex]==0:
+        if tempRes[maxIndex]==0:#right pq found
             printFixedLen(pq)
             print(f"|",end="")
             printArr(tempRes)
             pqUsedArr.append(pq)
-            if maxIndex == 1:
-                #pqUsedArr.append(-tempRes[0])
+            if maxIndex == 1:# only one number left
                 return pqUsedArr
             return calculate(tempRes, pqArr, maxIndex-1, pqUsedArr)
 
@@ -45,6 +44,11 @@ def getBracket(pqUsed):
     return f"(x{pqUsed})"
 
 def printRes():
+    string = ""
+    for x in range(0,len(memArr)*6+5):
+        string += "–"
+    print(string)
+
     for pqUsed in pqUsedArr:
         print(getBracket(-pqUsed),end="")
     print()
@@ -54,6 +58,7 @@ def printArr(arr):
         printFixedLen(float(x))
     print()
 
+#####MAIN#####
 members = input("Enter absolute members of polynom (divided by spaces): ")
 print()
 memArr = members.split(" ")
@@ -67,10 +72,6 @@ print(f"  –  |",end="")
 printArr(memArr)
 pqUsedArr = calculate(memArr, pqArr, maxIndex, pqUsedArr)
 if pqUsedArr:
-    string = ""
-    for x in range(0,len(memArr)*6+5):
-        string += "–"
-    print(string)
     printRes()
 print()
 input("Press ENTER to exit")
